@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { BookingModal } from "@/components/ui/BookingModal";
 
 const navLinks = [
   { name: "History", href: "#history" },
@@ -14,6 +16,7 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +30,8 @@ export function Navbar() {
     <>
       <motion.header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out mix-blend-difference text-white",
-          scrolled ? "py-6 backdrop-blur-md" : "py-10"
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out text-foreground",
+          scrolled ? "py-6 bg-background/80 backdrop-blur-md border-b border-border/10" : "py-10 bg-transparent"
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -42,12 +45,12 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Nav - Minimal */}
-          <nav className="hidden md:flex items-center space-x-12">
+          <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-xs font-medium tracking-[0.2em] uppercase hover:text-white/60 transition-colors relative group overflow-hidden"
+                className="text-xs font-medium tracking-[0.2em] uppercase hover:text-foreground/60 transition-colors relative group overflow-hidden"
               >
                 <span className="block transition-transform duration-500 group-hover:-translate-y-full">
                   {link.name}
@@ -57,9 +60,14 @@ export function Navbar() {
                 </span>
               </Link>
             ))}
-            <Link href="#visit" className="text-xs font-medium tracking-[0.2em] uppercase border border-white/30 px-6 py-2 hover:bg-white hover:text-black transition-all duration-300">
+            <div className="w-px h-4 bg-border/20 mx-4" />
+            <ThemeToggle />
+            <button 
+              onClick={() => setIsBookingOpen(true)}
+              className="text-xs font-medium tracking-[0.2em] uppercase border border-foreground/30 px-6 py-2 hover:bg-foreground hover:text-background transition-all duration-300"
+            >
               Tickets
-            </Link>
+            </button>
           </nav>
 
           {/* Mobile Menu Trigger */}
@@ -110,9 +118,11 @@ export function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-               <Link
-                 href="#visit"
-                 onClick={() => setMenuOpen(false)}
+               <button
+                 onClick={() => {
+                   setMenuOpen(false);
+                   setIsBookingOpen(true);
+                 }}
                  className="mt-8 text-sm tracking-[0.3em] uppercase border-b border-primary text-primary pb-2"
                >
                  <motion.span
@@ -122,11 +132,13 @@ export function Navbar() {
                  >
                   Book Tickets
                  </motion.span>
-               </Link>
+               </button>
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </>
   );
 }

@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/layout/Preloader";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,7 +19,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Monas | National Monument of Indonesia",
-  description: "The National Monument (Monas) symbolizes the fight for Indonesia. Discover the history and heritage of Indonesia.",
+  description: "A digital tribute to the symbol of Indonesian independence.",
 };
 
 export default function RootLayout({
@@ -27,16 +28,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${playfair.variable} antialiased bg-background text-foreground font-sans`}
       >
-        <SmoothScroll>
-          <Preloader />
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <ThemeProvider
+          attribute="class"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SmoothScroll>
+            <Preloader />
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );
