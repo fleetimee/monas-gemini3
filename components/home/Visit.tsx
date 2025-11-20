@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { MapPin, Clock, Calendar, ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRef, useState } from "react";
-import { BookingModal } from "@/components/ui/BookingModal";
+import { useBookingModal } from "@/components/ui/BookingModalProvider";
 
 const MonasMap = dynamic(() => import("@/components/ui/MonasMap"), {
   ssr: false,
@@ -17,7 +17,7 @@ const MonasMap = dynamic(() => import("@/components/ui/MonasMap"), {
 
 export function Visit() {
   const containerRef = useRef(null);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const { open } = useBookingModal();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -95,7 +95,7 @@ export function Visit() {
               <div className="flex justify-between items-end">
                 <p className="text-muted-foreground font-light">From IDR 4,000 to IDR 15,000</p>
                 <button 
-                  onClick={() => setIsBookingOpen(true)}
+                  onClick={open}
                   className="flex items-center space-x-2 text-primary text-sm uppercase tracking-widest hover:text-foreground transition-colors duration-300 group/btn"
                 >
                   <span>Book Now</span>
@@ -118,8 +118,6 @@ export function Visit() {
          <MonasMap />
          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent pointer-events-none" />
       </motion.div>
-
-      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </section>
   );
 }

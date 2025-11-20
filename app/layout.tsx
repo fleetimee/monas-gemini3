@@ -3,10 +3,9 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeTransitionProvider } from "@/components/ui/ThemeTransition";
+import { BookingModalProvider } from "@/components/ui/BookingModalProvider";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Preloader } from "@/components/layout/Preloader";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,9 +39,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ThemeTransitionProvider>
-            <Navbar />
-            <main className="flex-grow">{children}</main>
-            <Footer />
+            <BookingModalProvider>
+              <Navbar />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </BookingModalProvider>
           </ThemeTransitionProvider>
         </ThemeProvider>
       </body>

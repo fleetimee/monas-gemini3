@@ -134,21 +134,21 @@ export function Timeline() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-10%" }}
                   transition={{ duration: 0.8, delay: index * 0.1, ease: [0.87, 0, 0.13, 1] }}
-                  className={`flex items-center ${isEven ? "flex-row" : "flex-row-reverse"}`}
+                  className={`flex flex-col md:flex-row items-center gap-6 md:gap-0 ${isEven ? "md:flex-row" : "md:flex-row-reverse"}`}
                 >
                   {/* Content Side */}
-                  <div className={`w-1/2 ${isEven ? "pr-12 text-right" : "pl-12 text-left"}`}>
+                  <div className={`w-full md:w-1/2 ${isEven ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left"} text-left`}>
                     <motion.button
                       onClick={() => setSelectedEvent(event)}
                       className="group relative inline-block text-left"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <span className={`text-primary font-serif text-4xl md:text-5xl block mb-4 opacity-80 group-hover:opacity-100 transition-opacity ${isEven ? "text-right" : "text-left"}`}>
+                      <span className={`text-primary font-serif text-4xl md:text-5xl block mb-4 opacity-80 group-hover:opacity-100 transition-opacity ${isEven ? "md:text-right" : "md:text-left"}`}>
                         {event.year}
                       </span>
-                      <h3 className={`text-foreground text-2xl font-serif mb-4 group-hover:text-primary transition-colors ${isEven ? "text-right" : "text-left"}`}>{event.title}</h3>
-                      <p className={`text-muted-foreground leading-relaxed font-light group-hover:text-foreground/80 transition-colors ${isEven ? "text-right" : "text-left"}`}>
+                      <h3 className={`text-foreground text-2xl font-serif mb-4 group-hover:text-primary transition-colors ${isEven ? "md:text-right" : "md:text-left"}`}>{event.title}</h3>
+                      <p className={`text-muted-foreground leading-relaxed font-light group-hover:text-foreground/80 transition-colors ${isEven ? "md:text-right" : "md:text-left"}`}>
                         {event.desc}
                       </p>
                       <div className={`absolute -inset-4 border border-foreground/0 group-hover:border-foreground/10 rounded-xl transition-all duration-300 pointer-events-none`} />
@@ -167,7 +167,7 @@ export function Timeline() {
                   </motion.div>
 
                   {/* Empty Side */}
-                  <div className="w-1/2" />
+                  <div className="hidden md:block w-1/2" />
                 </motion.div>
               );
             })}
@@ -257,4 +257,3 @@ export function Timeline() {
     </section>
   );
 }
-

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { BookingModal } from "@/components/ui/BookingModal";
+import { useBookingModal } from "@/components/ui/BookingModalProvider";
 
 const navLinks = [
   { name: "History", href: "#history" },
@@ -16,7 +16,7 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const { open } = useBookingModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,7 +63,7 @@ export function Navbar() {
             <div className="w-px h-4 bg-border/20 mx-4" />
             <ThemeToggle />
             <button 
-              onClick={() => setIsBookingOpen(true)}
+              onClick={open}
               className="text-xs font-medium tracking-[0.2em] uppercase border border-foreground/30 px-6 py-2 hover:bg-foreground hover:text-background transition-all duration-300"
             >
               Tickets
@@ -121,7 +121,7 @@ export function Navbar() {
                <button
                  onClick={() => {
                    setMenuOpen(false);
-                   setIsBookingOpen(true);
+                   open();
                  }}
                  className="mt-8 text-sm tracking-[0.3em] uppercase border-b border-primary text-primary pb-2"
                >
@@ -138,7 +138,6 @@ export function Navbar() {
         )}
       </AnimatePresence>
 
-      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </>
   );
 }
