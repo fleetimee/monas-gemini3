@@ -13,6 +13,7 @@ export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line
     setMounted(true);
   }, []);
 
@@ -26,7 +27,7 @@ export function ThemeToggle() {
     <motion.button
       onClick={toggleTheme}
       className={cn(
-        "relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 border",
+        "relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border",
         isDark 
           ? "bg-neutral-900 border-[#c6a87c]/30 hover:border-[#c6a87c] hover:bg-neutral-800" 
           : "bg-[#f4f4f5] border-[#c6a87c]/30 hover:border-[#c6a87c] hover:bg-white"
@@ -41,7 +42,7 @@ export function ThemeToggle() {
           initial={{ scale: 0.5, opacity: 0, rotate: -90 }}
           animate={{ scale: 1, opacity: 1, rotate: 0 }}
           exit={{ scale: 0.5, opacity: 0, rotate: 90 }}
-          transition={{ duration: 0.3, ease: "backOut" }}
+          transition={{ duration: 0.2, ease: "backOut" }}
         >
           {isDark ? (
             <Moon size={18} className="text-[#c6a87c]" />

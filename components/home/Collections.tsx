@@ -43,7 +43,7 @@ export function Collections() {
                <span className="text-white/30">Gallery</span>
              </h3>
              <p className="text-muted-foreground text-xl max-w-md leading-relaxed">
-               Explore the detailed dioramas and architectural marvels that chronicle Indonesia's journey.
+               Explore the detailed dioramas and architectural marvels that chronicle Indonesia&apos;s journey.
              </p>
           </div>
 

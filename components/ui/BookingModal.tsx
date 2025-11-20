@@ -187,7 +187,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   </motion.div>
                   <h3 className="font-serif text-3xl text-white mb-4">Booking Confirmed</h3>
                   <p className="text-muted-foreground text-sm mb-12 font-light leading-relaxed max-w-[80%] mx-auto">
-                    We've sent the tickets to your email. <br/>We look forward to seeing you at Monas.
+                    We&apos;ve sent the tickets to your email. <br/>We look forward to seeing you at Monas.
                   </p>
                   <button
                     onClick={resetForm}

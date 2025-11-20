@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { MapPin, Clock, Calendar, ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useBookingModal } from "@/components/ui/BookingModalProvider";
 
 const MonasMap = dynamic(() => import("@/components/ui/MonasMap"), {

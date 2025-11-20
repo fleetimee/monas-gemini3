@@ -21,12 +21,12 @@ export function ThemeTransitionProvider({ children }: { children: ReactNode }) {
     // Wait for the "cover" animation to complete before switching theme
     setTimeout(() => {
       setTheme(theme === "dark" ? "light" : "dark");
-    }, 600); // Match this with the animation duration
+    }, 150); // Match this with the animation duration
 
     // Wait for the "reveal" animation to complete
     setTimeout(() => {
       setIsTransitioning(false);
-    }, 1200);
+    }, 300);
   };
 
   return (
@@ -39,7 +39,7 @@ export function ThemeTransitionProvider({ children }: { children: ReactNode }) {
             initial={{ clipPath: "circle(0% at 50% 50%)" }}
             animate={{ clipPath: "circle(150% at 50% 50%)" }}
             exit={{ clipPath: "circle(0% at 50% 50%)" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
              {/* Museum Style Gradient Background (Gold/Neutral) */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#c6a87c] via-[#1a1a1a] to-[#0f0f10] animate-gradient-xy" />
